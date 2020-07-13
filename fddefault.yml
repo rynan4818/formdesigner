@@ -1,0 +1,1979 @@
+--- 
+- !ruby/struct:FDControls::FDPallet 
+  title: Standard
+  items: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRButton
+    inst: button
+    dflt_w: 80
+    dflt_h: 24
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: Button
+    attrs: &id001 
+      - name
+      - caption
+      - x
+      - y
+      - w
+      - h
+      - &id003 
+        - font
+        - lambda{|c| getFontName(c)}
+        - :_btFont
+      - &id004 
+        - style
+        - |-
+          lambda{|c| st = (c.style|c.owndraw)-c._default_style
+                st == 0 ? "default" : sprintf("%#x",st)}
+        - :_btStyle
+      - &id005 
+        - exstyle
+        - lambda{|c| c.exstyle.to_x}
+        - :_btExStyle
+      - &id006 
+        - modules
+        - lambda{|c| "click ->"}
+        - :_btModule
+      - &id007 
+        - tabOrder
+        - lambda{|c| c.tab_order}
+        - :_btTab
+      - &id008 
+        - owndraw
+        - lambda{|c| c.owndraw_used?}
+        - :_cbOwnDraw
+    events: 
+    - clicked
+    - dblclicked
+    mthds: []
+
+    mods: &id002 
+      :VROwnerDrawControlContainer: &id009 !ruby/struct:FDModules::FDMod 
+        events: []
+
+        methods: []
+
+        requires: vrowndraw
+      :VRDropFileTarget: &id010 !ruby/struct:FDModules::FDMod 
+        events: 
+        - self_dropfiles(files)
+        methods: []
+
+        requires: vrddrop
+      :VRResizeSensitive: &id011 !ruby/struct:FDModules::FDMod 
+        events: 
+        - self_resize(w,h)
+        methods: []
+
+        requires: 
+      :VRDragFileSource: &id012 !ruby/struct:FDModules::FDMod 
+        events: 
+        - dragStart(files)
+        methods: []
+
+        requires: vrddrop
+      :VRMouseFeasible: &id013 !ruby/struct:FDModules::FDMod 
+        events: 
+        - self_lbuttonup(shift,x,y)
+        - self_lbuttondown(shift,x,y)
+        - self_rbuttonup(shift,x,y)
+        - self_rbuttondown(shift,x,y)
+        - self_mousemove(shift,x,y)
+        methods: []
+
+        requires: vrhandler
+      :VRFocusSensitive: &id014 !ruby/struct:FDModules::FDMod 
+        events: 
+        - self_gotfocus()
+        - self_lostfocus()
+        methods: []
+
+        requires: vrhandler
+      :VRKeyFeasible: &id015 !ruby/struct:FDModules::FDMod 
+        events: 
+        - self_char(keycode,keydata)
+        - self_deadchar(keycode,keydata)
+        - self_syschar(keycode,keydata)
+        - self_sysdeadchar(keycode,keydata)
+        methods: []
+
+        requires: vrhandler
+      :VRDrawable: &id016 !ruby/struct:FDModules::FDMod 
+        events: 
+        - self_paint
+        methods: []
+
+        requires: 
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJyVj8EKwjAMhu95meBOu/7rLOwgGzLG5k0Q4kTRg7rXN61Vp6B2CUnzf0lK
+      SxmaWbm1dZPsL+XuZNbt8ty1ML1YU3fHDME2osm4hNYlOwAEzPGYsFr/NhMC
+      kEKX/V1aiELxUJuLHIPjVXoP5MxDzg75s2J2jJhTrA5vLrGavg+Mn6v62hdP
+      D5o+wRRNUxfGmuIW+GVJ1J//axoDugFHdbiD
+
+    default_style: 0x50000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VREdit
+    inst: edit
+    dflt_w: 120
+    dflt_h: 20
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: Edit
+    attrs: *id001
+    events: 
+    - changed
+    mthds: 
+    - text
+    - text=(str)
+    - getSel
+    - setSel(st,en,noscroll=0)
+    - setCaret(r)
+    - replaceSel(newstr)
+    - readonly=(b)
+    - limit
+    - modified
+    - modified=(f)
+    - cut
+    - copy
+    - paste
+    - clear
+    - undo
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJyNT8sKwjAQvO/PBD3lOk0MeJAWKaXxJghRUfSg9Pfdra1JCmo3zGZnkn1R
+      gWZRHl3dLC/P8nw3+3b78C3MKThT+1uBwQ6BnRGHVpzrAAJWGH84jn+bGQCE
+      NSf3tTgILIZe5MeNRSd6pd+AVaqzSqT+rpQSjZTS2F2zE+Zy+vbBZ+MWwXO3
+      aMI171zJAJohAkcf5HxMQMJJKuYJUigtKJ1s0jFymgqRJyNOVvi78xxOqUAv
+      0kCk6Q==
+
+    default_style: 0x50000080
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRText
+    inst: text
+    dflt_w: 120
+    dflt_h: 100
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: Text
+    attrs: *id001
+    events: 
+    - changed
+    mthds: 
+    - text
+    - text=(str)
+    - getSel
+    - setSel(st,en,noscroll=0)
+    - setCaret(r)
+    - replaceSel(newstr)
+    - readonly=(b)
+    - limit
+    - modified
+    - modified=(f)
+    - cut
+    - copy
+    - paste
+    - clear
+    - undo
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJx9UMEKwjAMvedngp52zVoLHmRDxli9CUJVFD0o+32bZq7NEFuS5b3uvaSF
+      mvpVc3Zdv769m+vTHIf9yw9kLsGZzj9qmtYpxGQ40cDJjURAtKHvHy7W/5eZ
+      gihsozh5xSJEMiQyHu4sjcy3lQRZxNEiU+nbIjIHiBUd7mqHJfaqex38ZAoW
+      q+jDBFccGqM6T9PMGLRAHHlAwSLNBhqDCPgGLCon4NA4NxAM2bEUSPdsyN1Y
+      jIgFhiUx48Uj/XpUKAn4AKt4mWE=
+
+    default_style: 0x50000044
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRCheckbox
+    inst: checkBox
+    dflt_w: 96
+    dflt_h: 24
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: CheckBox
+    attrs: *id001
+    events: 
+    - clicked
+    - dblclicked
+    mthds: 
+    - checked?
+    - check(v)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJyVUMEKwjAMvedngp7m8a2zsINsyBibN0GIE0UPyn7fZN1gPUxmQtO8lzRp
+      QinqTXH1Vb29f4rby52b47tt4DrxrmqfKUa5iBpnBo0Z3wME7DFlePV/ixsP
+      ILk+HmqpI0rKQGrwkKE3vkzCQcbcZ2zUcJfMxhFzgtMjUlmLaU7wKLuApcuD
+      LmFSgDhBB4iwDjXHGhUEbJ1FrJ6ScQdZ7DhhWvvFad+LM/+7NJoT9AUyh7hV
+
+    default_style: 0x50000003
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRRadiobutton
+    inst: radioBtn
+    dflt_w: 96
+    dflt_h: 24
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: RadioButton
+    attrs: *id001
+    events: 
+    - clicked
+    - dblclicked
+    mthds: 
+    - checked?
+    - check(v)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJytT8EKwjAMvedngjttx7Sz0INsyBjrbooQNxQ9KPt9025iN0QUTEia99qk
+      L6CoXhVHU9XJ6V70V71rtjfXkO7Y6MpdFE12YEnaJ2p8MgMREK3p+cJI/dn0
+      FERspTnMkoKF5EDK5SanwfNlOgbliEOOngpnieg5QEypPc+cv8XwW8MeswhD
+      y9r2+CKc7cSzCMtCEdbWr9knHsOSeIfHAWrxgQqyR0migCmW6Ej9d+c5hpiA
+      B0Fku7k=
+
+    default_style: 0x50000009
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRStatic
+    inst: static
+    dflt_w: 96
+    dflt_h: 24
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: StaticText
+    attrs: *id001
+    events: []
+
+    mthds: []
+
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJylj80KwjAQhO/7MkFPvU5SUzxIi5TSeBOEqFjsQenru5tEiCKlYEI2+83O
+      5oc0ulV9tm23vj3r62iO/f7hepiLt6Z1d400Tp6DkYBegp0AAjZ4Oyzn88Ok
+      BfgtN4ezOPEs+iBycVdiEr0p4kKp1FQqkcLeKCUaKVXgMHxMv5RpcQMregA0
+      56gik2bJVS5iMOQs5sTDV52Zb9YsiSkZAmcNM0zxPClkNwbOnvj3n38w5QK9
+      AOuPuzk=
+
+    default_style: 0x50000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRListbox
+    inst: listBox
+    dflt_w: 120
+    dflt_h: 120
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: ListBox
+    attrs: *id001
+    events: 
+    - selchanged
+    mthds: 
+    - addString(idx,str)
+    - deleteString(idx)
+    - countStrings
+    - clearStrings
+    - eachString{|i|}
+    - setListStrings(strarray)
+    - selectedString
+    - select(idx)
+    - getTextOf(idx)
+    - setDir(fname,opt=0)
+    - findString(findstr,start=0)
+    - getDataOf(idx)
+    - setDataOf(idx,data)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJx9UMEOgjAMvfdnqp64lsESDkYghIA3E5OJ0ehBw+/bbswMmHZZt/f6urcN
+      Umq3h4tu2t3tfbg+1amrX31HajBaNf0jpSnOhpOSRJ0kPRIBUU5eoXn/P9Q0
+      iUzBzfYs3hgmjSW5uM9oFL5M3KQMccxQKLuWiMIBYkLH+2yYFTahu2C0Ic3F
+      EBCClcPW3DnP614PE+EFvmF1oMN17kZlMTBR2vqmigoijl8DWAh+XTH6BAje
+      uGhYfFLkUyEk4APesqAd
+
+    default_style: 0x50800001
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRCombobox
+    inst: comboBox
+    dflt_w: 120
+    dflt_h: 80
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCombo
+    info: ComboBox
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - drop_h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    - *id008
+    events: 
+    - selchanged
+    mthds: 
+    - addString(idx,str)
+    - deleteString(idx)
+    - countStrings
+    - clearStrings
+    - eachString{|i|}
+    - setListStrings(strarray)
+    - selectedString
+    - select(idx)
+    - getTextOf(idx)
+    - setDir(fname,opt=0)
+    - findString(findstr,start=0)
+    - getDataOf(idx)
+    - setDataOf(idx,data)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJx9UcsKgzAQvO/PLO0p1zUa8FAsIqK9FQpbS0t7aMnvd/MCTa0bsmZmdiao
+      UFC/a66m6/f3T3N76fPQvseB9MRGd+OzoFgXlqZdo8E1Y4mAqKI0YeS8XTpu
+      Iq7F7LPkwEKyJ0U8lGQdf1RhU4loS3SUfx4RHQeIik6PxeJfPM5u91js6MxS
+      NhAqygljqoCrNq0QUEEX9URkA3nA4gJYG9gyzHXwBNPynTjJqp4yrD0OcfKr
+      1B9DFrjyUWFOwBfQtaGd
+
+    default_style: 0x50000203
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VREditCombobox
+    inst: edCmbBox
+    dflt_w: 120
+    dflt_h: 80
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCombo
+    info: EditComboBox
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - drop_h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    - *id008
+    events: 
+    - selchanged
+    mthds: 
+    - addString(idx,str)
+    - deleteString(idx)
+    - countStrings
+    - clearStrings
+    - eachString{|i|}
+    - setListStrings(strarray)
+    - selectedString
+    - select(idx)
+    - getTextOf(idx)
+    - setDir(fname,opt=0)
+    - findString(findstr,start=0)
+    - getDataOf(idx)
+    - setDataOf(idx,data)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJyFUE0LwjAMvefPBD31mnUb8yCOMWTzJgwyRdGD0r9v+iXdnJrQNO+9vJQN
+      MhpXu7Fs9+vLc3e+62PXPPqO9IlL3fa3jEIMLEXbQp0tpSECooLeE39Dh0PE
+      GzG7XdKwkLY321yw76lW/lCOaHK0lLtrRMsBoqLDdZL8ifvkdYfFjtYsYTyh
+      ghwxxvC4aGL6BQW0QY/EbGC+YPIALA38MqQ6OIJp+k0cZVUNTkfjU1VZgsWs
+      vhhmCxd+KqQEvACsY6Pz
+
+    default_style: 0x50000243
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRGroupbox
+    inst: groupBox
+    dflt_w: 120
+    dflt_h: 120
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: GroupBox
+    attrs: *id001
+    events: []
+
+    mthds: []
+
+    mods: 
+      :VROwnerDrawControlContainer: *id009
+      :VRDropFileTarget: *id010
+      :VRResizeSensitive: *id011
+      :VRDragFileSource: *id012
+      :VRMouseFeasible: *id013
+      :VRFocusSensitive: *id014
+      :VRKeyFeasible: *id015
+      :VRMessageParentRelayer: &id017 !ruby/struct:FDModules::FDMod 
+        events: []
+
+        methods: []
+
+        requires: ""
+      :VRDrawable: *id016
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJydUMEKgzAMvedXPIS5izvGquBhKE5EvQ0K1bG5HTb8/SVVodtgbCbkNe+1
+      aeBBSNUm65Ky8s+P7HRTx7q4NzWp3iSqbK4hzaENgxKgWiAZiYAopuVFwv33
+      UHMRmZSH7V/cGBaNFflyH9Eoeh5MRRHiGKFI9swRRQPEgNrLS5pPjk4wH7qt
+      5gQBbQUv7efsfuTw74DLYc3GhcOaje2wiwtOOLwJJVvi5cK15YV44lsTJ+6Y
+      Cq6r8ARMuK44
+
+    default_style: 0x50000007
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRPanel
+    inst: panel
+    dflt_w: 120
+    dflt_h: 120
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: Panel
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    events: []
+
+    mthds: []
+
+    mods: 
+      :VROwnerDrawControlContainer: *id009
+      :VRDropFileTarget: *id010
+      :VRResizeSensitive: *id011
+      :VRDragFileSource: *id012
+      :VRMouseFeasible: *id013
+      :VRFocusSensitive: *id014
+      :VRKeyFeasible: *id015
+      :VRMessageParentRelayer: *id017
+      :VRDrawable: *id016
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJydUMEKgkAQvc+veBiyi9fn2oKHUEJEvQXCamR1KPz9ZldFo4hyHvN23tud
+      HRgKkW+SRme5f34kp5s6Fod7WUC1RqusvIYYozZCyhIKS7oHCNhheqGl/h5q
+      TMDE0uz+ksKIaZwpl/sIvfXTYEhEzH3E1nJnymw9Yg5QdS8w75oXIfrSbGsB
+      Waqd4cXtiOZHTf82LDWtmThpWjNx0jQb80q81Gq3jQH+pyVWHS0NegJFCq5T
+
+    default_style: 0x50000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRCanvasPanel
+    inst: canvaspanel
+    dflt_w: 120
+    dflt_h: 120
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: CanvasPanel
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    events: []
+
+    mthds: 
+    - createCanvas(w,h,color=0xffffff)
+    - canvas
+    mods: 
+      :VROwnerDrawControlContainer: *id009
+      :VRDropFileTarget: *id010
+      :VRResizeSensitive: *id011
+      :VRDragFileSource: *id012
+      :VRMouseFeasible: *id013
+      :VRFocusSensitive: *id014
+      :VRKeyFeasible: *id015
+      :VRMessageParentRelayer: *id017
+      :VRDrawable: *id016
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJx9kEtrwzAMx+/+KjmI7eSrajewltJ0lJLmVhi4j+Wh0mKWT19JcfrYYAqW
+      9ftHkm2ZCW7elvt8vXn/vi6PnduVn5dtie4QcrfethNM9hXYOXFYissjokGc
+      4piRc/y/ubQQwwcXay8OAotBRf658BhFL+yw0ANEDyLpXgCIZgAswqvFYesX
+      6VO22GsD1oU56sdiESz367XMK2uisi3+craqK0P009VVw71UIGaixHZGA3eN
+      nmjniWlg81t48PmJH0/IAiU787UjvAjK5O7Mj4nZbuQmcastjQgyy6yioCnd
+      SQbIXFOLzCsPiSsiHvesuQ/VPE/Z3AD5Carq
+
+    default_style: 0x50000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRBitmapPanel
+    inst: bmppanel
+    dflt_w: 120
+    dflt_h: 120
+    style: 0
+    required: vrcontrol
+    included: 
+    createMethod: :newFDCtrl
+    info: BmpPanel
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    events: []
+
+    mthds: 
+    - loadFile(filename)
+    - createBitmap(info,bmp)
+    - bmp
+    mods: 
+      :VROwnerDrawControlContainer: *id009
+      :VRDropFileTarget: *id010
+      :VRResizeSensitive: *id011
+      :VRDragFileSource: *id012
+      :VRMouseFeasible: *id013
+      :VRFocusSensitive: *id014
+      :VRKeyFeasible: *id015
+      :VRMessageParentRelayer: *id017
+      :VRDrawable: *id016
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJx9kEtPwzAQhO/+KxwGsCrFx62TyD2gNlZVpUckyymPCg6g8PPZ9SMpF9ay
+      4288GT/Ulk4P+0t/PD2+f+9fP+3z6L/OI9mXqbfH88eWSoWJBysDjTL0M5Ei
+      6qg6ep7/X7Z0omnHP6csnkwsTknkxaeWZtEPTe7UAnMLkdL3AIimgIa0cVGH
+      2roBQVphzxy1qXzvXV2PKtmDHrTREiAm74QjDHMUuxZewl2orHK6DquBz7Jy
+      BFcXU4ywIBwg2wxKzFw/SUgGps2bB1ACgLvYSIgpgczYCKvVkAWdj8wB1/iH
+      c4Vb5gfTyw7LslmPKIxYroTiNrd3zm1Qvwh7lAc=
+
+    default_style: 0x50000000
+- !ruby/struct:FDControls::FDPallet 
+  title: Additonal
+  items: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRRichedit
+    inst: richEdit
+    dflt_w: 150
+    dflt_h: 150
+    style: 0
+    required: vrrichedit
+    included: 
+    createMethod: :newFDCtrl
+    info: RichEdit
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    events: 
+    - changed
+    mthds: 
+    - text
+    - text=(str)
+    - getSel
+    - setSel(st,en,noscroll=0)
+    - setCaret(r)
+    - replaceSel(newstr)
+    - readonly=(b)
+    - limit
+    - modified
+    - modified=(f)
+    - cut
+    - copy
+    - paste
+    - clear
+    - undo
+    - char2line(ptr)
+    - setTextFont(fontface,height=280,area=SCF_SELECTION)
+    - getTextFont(selarea=true)
+    - setTextColor(col,area=SCF_SELECTION)
+    - getTextColor(selarea=true)
+    - setBold(flag=true,area=SCF_SELECTION)
+    - setItalic(flag=true,area=SCF_SELECTION)
+    - setUnderlined(flag=true,area=SCF_SELECTION)
+    - setStriked(flag=true,area=SCF_SELECTION)
+    - bold?(selarea=true)
+    - italic?(selarea=true)
+    - underlined?(selarea=true)
+    - striked?(selarea=true)
+    - setAlignment(align)
+    - bkcolor=(color)
+    - selformat(area=SCF_SELECTION)
+    - selformat=(format)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    items: 
+    bmp: |
+      
+      eJx9kMEOgjAMhu99FQ9/NDHhWoYkHghoCAFvJsapEfWgWcLT28GUAcaSdf2/
+      tSsdhVzM01OcF4vrK7081L7cPquS1VnHKq/uITs7aHHKOi6tiw0zMa/4kxFL
+      /N+UW8x6LcXtXRJogbqFcphEbCzPgm5xBJgIFrV7BlhGQMAYmplo43e3ujuQ
+      YixvpgfAbFdvfF0fxxoun34nDC+Q3/QbdLt4GgOYRoJmou2crmPSJF0VOZAh
+      cLN/dT+xfAGyqSYPoIGfMHqkH49KPqA372WRQg==
+
+    default_style: 0x50000004
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRToolbar
+    inst: toolBar
+    dflt_w: 150
+    dflt_h: 26
+    style: 0
+    required: vrcomctl
+    included: VRToolbarUseable
+    createMethod: :newFDToolbar
+    info: Toolbar
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - - ccstyles
+      - lambda{|c| FDWStyle::CCSStr[c.style & 0x2f]}
+      - 
+    - - buttons
+      - lambda{|c| "click ->"}
+      - :_btArray
+    events: 
+    mthds: 
+    - insertButton(i,name,style=TBSTYLE_BUTTON)
+    - addButton(style)
+    - deleteButton(i)
+    - clearButtons
+    - countButtons
+    - setImagelist(imglist)
+    - setParent(hwnd)
+    - autoSize
+    - indeterminateOf(i,bool=true)
+    - commandToIndex(id)
+    - enableButton(i,bool=true)
+    - getButtonStateOf(id)
+    - setButtonStateOf(i,state)
+    - setButtons(buttons)
+    - enumButtons
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    items: 
+    - - toolButton1
+    - - toolButton2
+      - 1
+    - - toolButton3
+      - 6
+    - - toolButton4
+      - 6
+    - - toolButton5
+      - 6
+    bmp: |
+      
+      eJyNkE0PgjAMhu/9M4te4Fo6l3AgEEMIeDMxqTMaPUiW8OvtBiiQqHRpt/fZ
+      17tBgtUmP5uy2l7b/PKgY71/NjWSZUNlc09wiBNLIV+w9sU4REDc4bjCyPh3
+      0JCInMrmcJYMWCAHKJOZRud5EfeJWimnlUehL5TyDJSK8XCbNV6r4duCpWGb
+      +sZF39vgEjCA/j0UtVHrRIuK9Uez9s6nOuuyjhCWgKLwHZMNFG5kTamk3Gjf
+      GjwYLfHwo0uLah7u75vXaJgCeAGRwbDN
+
+    default_style: 0x50000001
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRRebar
+    inst: rebar
+    dflt_w: 150
+    dflt_h: 32
+    style: 0
+    required: vrcomctl
+    included: 
+    createMethod: :newFDRebar
+    info: Rebar
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - - buttons
+      - lambda{|c| "click ->"}
+      - :_btArray
+    events: 
+    - layoutchanged
+    mthds: 
+    - insertband(cntl,txt,minx=30,miny=cnt.h+2,band=-1)
+    - bkColor=(c)
+    - bkColor
+    - textColor=(c)
+    - textColor
+    - relayout(x=self.x, y=self.y, w=self.w, h=self.h)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJydUMEKwjAMvedngu6yHrPOOQ+yIUO23cRJh0zwoOz3TdZWxhC0JiR57yUp
+      bSGhflX0WXVcD8/ieten+vBoatKDyXTVNgk56wwnLYkaSVsOINrQe+KraRdE
+      ZsfL01kMDIuCx33K3GIqYxuUIo4pijTVElE0QIypvf3n4MHygirqo27mCi+5
+      VNfOhQMLaNvn3A38zCF0Yc4hZMGaivyTwL8JFxb0YR+bLwcGq/4=
+
+    default_style: 0x50000001
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRListview
+    inst: listView
+    dflt_w: 120
+    dflt_h: 120
+    style: 0
+    required: vrcomctl
+    included: 
+    createMethod: :newFDCtrl
+    info: Listview
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    - *id008
+    - - lvexstyle
+      - lambda{|c|c.lvexstyle.to_x}
+      - :_btStyle
+    events: 
+    - itemchanged(idx,state)
+    - itemchanging(idx,state)
+    - columnclick(subitem)
+    - begindrag
+    - beginrdrag
+    mthds: 
+    - setViewMode(mode)
+    - getViewMode
+    - iconview
+    - reportview
+    - smalliconview
+    - listview
+    - setBkColor(color)
+    - bkcolor=(color)
+    - lvexstyle
+    - lvexstyle=(style)
+    - setListviewExStyle(style,mask=0xffffffff)
+    - insertColumn(column,text,width=50,format=0,textsize=title.size)
+    - deleteColumn(column)
+    - clearColumns
+    - countColumns
+    - addColumn(text,width=50,format=0,textsize=title.size)
+    - setImagelist(imagelist,itype=0)
+    - setItemIconOf(hitem,img)
+    - getItemIconOf(hitem)
+    - getColumnWidthOf(column)
+    - setColumnWidthOf(column,width)
+    - getColumnTextOf(column)
+    - setColumnTextOf(column,text)
+    - getColumnFormatOf(column)
+    - setColumnFormatOf(column,format)
+    - insertItem(index,texts,lparam=0,textsize=128)
+    - addItem(texts,lparam=0,textsize=128)
+    - insertMultiItems(index,multitexts)
+    - deleteItem(idx)
+    - clearItems
+    - countItems
+    - hittest(x,y)
+    - hittest2(x,y)
+    - getItemRect(idx)
+    - getItemStateOf(idx)
+    - setItemStateOf(idx,state)
+    - "selectItem(idx,flag) "
+    - getNextItem(start,flags)
+    - focusedItem
+    - getItemTextOf(idx,subitem=0,textsize=128)
+    - setItemTextOf(idx,subitem,text,textsize=text.size)
+    - getItemLParamOf(idx)
+    - setItemLParamOf(idx,lparam)
+    - selected?(idx)
+    - focused?(idx)
+    - eachSelectedItems
+    - countSelectedItems()
+    - ensureVisible(i,partial=true)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    items: 
+    bmp: |
+      
+      eJyVUcEKwjAMvedngp52jZ2FHcaKjLHtJgixouhBLezrTboJFYqwlL7kveT1
+      kMKOuk1ztm23vb6ay8Mc+8Nz6Ml4tqYd7jta4sQCRoF6BRuIgGhP3wkr9f8w
+      yyXiSszxLSlYRI6iNOuSguqumC+ViKFElWJ2iKoBYkHj7efw+MYksryeakSY
+      JE35gawhnYe1hrQPaw0ph7WGyOOWycH8BTrgK1+xU/RZrsbCRX8QLquFdMvw
+      AXQBnGE=
+
+    default_style: 0x50000001
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRTreeview
+    inst: treeView
+    dflt_w: 120
+    dflt_h: 120
+    style: 0
+    required: vrcomctl
+    included: 
+    createMethod: :newFDCtrl
+    info: Treeview
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    events: 
+    - selchanged(hitem,lparam)
+    - itemexpanded(hitem,state,lparam)
+    - deleteitem(hitem,lparam)
+    - begindrag(hitem,state,lparam)
+    - beginrdrag(hitem,state,lparam)
+    mthds: 
+    - insertItem(hparent,hafter,text,lparam=0,textsize=text.size)
+    - insertMultiItems(hparent,hafter,items)
+    - addItem(hparent,text,lparam=0,textsize=text.size)
+    - addMultiItems(hparent,items)
+    - deleteItem(hitem)
+    - clearItems
+    - countItems
+    - selectItem(hitem)
+    - indent
+    - indent=
+    - hittest(x,y)
+    - hittest2(x,y)
+    - getNextItem(hitem,code)
+    - topItem
+    - root
+    - last
+    - selectedItem()
+    - getParentOf(hitem)
+    - getChildOf(hitem)
+    - getNextSiblingOf(hitem)
+    - setImagelist(imagelist)
+    - setItemIconOf(hitem,img,simg)
+    - getItemIconOf(hitem)
+    - setItemLParamOf(hitem,lparam)
+    - getItemLParamOf(hitem)
+    - setItemTextOf(hitem,text)
+    - getItemTextOf(hitem,textsize=128)
+    - setItemStateOf(hitem,state)
+    - getItemStateOf(hitem)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    items: 
+    bmp: |
+      
+      eJyFUGELwiAQ/e6fOeqL+3q6hKDYiDFc34LgKoqCEv9+6nQtq6V4d+/d+Z7I
+      BLaz6qCadn421ekmd3rz6DTKIynZdFeBce3JBekDah+URWSIC0wTytXTS8aD
+      SEt3OWi5ghxJgXTNdYnW83XRHywBbAmeCrkG8BwDKHB7SbsLqiO8MvyesNd+
+      wywfyAToM7/6LBKTDr8M2FcHGrwjNtzYhH2vx9FZZAMiExDDLyRpEZ8dCMkN
+      H438xeHZY4I9AVq4t9A=
+
+    default_style: 0x5000000f
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRProgressbar
+    inst: prgrssBar
+    dflt_w: 120
+    dflt_h: 20
+    style: 0
+    required: vrcomctl
+    included: 
+    createMethod: :newFDCtrl
+    info: Progressbar
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    events: []
+
+    mthds: 
+    - setRange(minr,maxr)
+    - position
+    - position=(pos)
+    - stepwidth=(st)
+    - step
+    - advance(n=1)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJzFUE0LwjAMvefPBD3t+tZa2GFsyBidN0GoK4oeJv37pnVCVfDjZEJe816S
+      0oZK9Itmb7p+ebg0/qy2dj0NFmp0RnXDqcRsOyegIsBGMAEgYIV7h5H8vak5
+      AFfJcLpLEieiS6IUa40Q9ba4BTRz0ByldLbMUSPmApvjg7tvOf06kHPKBXlc
+      bkHXPvlYRfcvnD41PPN8fbJtHf7/Z7oCLXS6gw==
+
+    default_style: 0x50000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRTrackbar
+    inst: trackBar
+    dflt_w: 120
+    dflt_h: 25
+    style: 0
+    required: vrcomctl
+    included: 
+    createMethod: :newFDCtrl
+    info: Trackbar
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    events: []
+
+    mthds: 
+    - position
+    - position=(pos)
+    - linesize
+    - linesize=(s)
+    - pagesize
+    - pagesize=(p)
+    - rangeMin
+    - rangeMin=(m)
+    - rangeMax
+    - rangeMax=(m)
+    - selStart
+    - selStart=(m)
+    - selEnd
+    - selEnd=(m)
+    - clearSel
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJyFkEsPgjAMx+/7Kh4ajQevZTjCwUAMIbCbxGRiXDTxMT++Kw9xE7HL2v7+
+      W7sHCzCfJweR5YvTPTle+K7Y3soCea0Ez8pzgJ3tlXWcHBbkhEFkiGvsdwib
+      TxvvJqKKbXHTyybKiqoR7eImREN6umonhgAmBJKamAKQxgBWKLUzlM9VJK9S
+      P3UX38x84RePHKCYK1TLwOFZrKIPftRxPdzTFnuCzwDE0JvBlLg1Ru5fg2+m
+      PlKz4YrTnzbGzpvZCzvtu4s=
+
+    default_style: 0x50000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRUpdown
+    inst: updown
+    dflt_w: 25
+    dflt_h: 16
+    style: 0
+    required: vrcomctl
+    included: 
+    createMethod: :newFDCtrl
+    info: Updown
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    events: 
+    - changed(pos)
+    mthds: 
+    - setRange(minr,maxr)
+    - getRange
+    - position
+    - position=
+    - base
+    - base=(b)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJyFUMEOgjAMvfdXODR6wuNjiNnBQAwh4M3EZGIketDw+64DDCMCXdr1vXXd
+      6yhCsUlvSV5sH5/0/lKX8vSuSqjaJCqvnhF6uxoblASUEpIWIGCPoSKx+bKp
+      3gGj7WXXyybGksaR9vAYoxU+CztHzNzGLJTbM2bhiDnEufGW+Yf7pw8DDnSt
+      qdbGIyYYPrb6RpgCLbIXG8xiEoKdhQdfYtSsNaD5gqkiX7KMtDazhzuFu58i
+      Gv8qfQEte7KW
+
+    default_style: 0x50000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRStatusbar
+    inst: statusbar
+    dflt_w: 120
+    dflt_h: 25
+    style: 0
+    required: vrcomctl
+    included: 
+    createMethod: :newFDCtrl
+    info: Statusbar
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    events: []
+
+    mthds: 
+    - setparts(p,width=[-1])
+    - parts
+    - getTextOf(idx)
+    - setTextOf(idx,text,style=0)
+    - getRectOf(idx)
+    - minheight=(minh)
+    mods: *id002
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJyFUE0PgjAMvfeveGhUDngsQyIHAzGEgDcT4mDR6EHD37cdDEZitC/r+t76
+      9gURleusTYpyc3tn5qku1elVV6Q6naiifkQ0RqM5KUlUSUp6IiDak+tIuP4d
+      ahxEOmWz3YsLzaK2Ii8eY+pFz8NhUIzYxyiSnXNE0QAxpPN9Af2Pu3uAK7rU
+      hyZEgxKtINDU5W0gK6uDYOAgggmujLmBZ7Z4PJ0NAze2H2ZBLH6DWJbcBEvO
+      5qXwjTfYbhsHOWAyT2/0Y/f30ySDL8AH2DytwQ==
+
+    default_style: 0x50000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRTabControl
+    inst: tabControl
+    dflt_w: 140
+    dflt_h: 45
+    style: 0
+    required: vrcomctl
+    included: 
+    createMethod: :newFDCtrl
+    info: TabControl
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - - owndraw
+      - lambda{|c| c.owndraw_used?}
+      - :_cbOwnDraw
+    events: 
+    - selchanged
+    mthds: 
+    - insertTab(index,text,textmax=text.size,lparam=0)
+    - clearTabs
+    - deleteTab(idx)
+    - countTabs
+    - selectedTab
+    - selectTab(idx)
+    - setImagelist(imagelist)
+    - setTabSize(width,height)
+    - getTabRect(i)
+    - adjustRect(x,y,w,h,flag=false)
+    - getTabTextOf(idx)
+    - setTabTextOf(idx,text)
+    - getTabImageOf(idx)
+    - setTabImageOf(idx,image)
+    - getTabLParamOf(idx)
+    - setTabLParamOf(idx,lparam)
+    mods: 
+      :VROwnerDrawControlContainer: *id009
+      :VRDropFileTarget: *id010
+      :VRResizeSensitive: *id011
+      :VRDragFileSource: *id012
+      :VRMouseFeasible: *id013
+      :VRFocusSensitive: *id014
+      :VRKeyFeasible: *id015
+      :VRMessageParentRelayer: *id017
+      :VRDrawable: *id016
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    bmp: |
+      
+      eJydUD0PgkAM3ftXHBqJA46PQxIGAzGEAJvEpGIkOqj8fe8OTnFQ0Tb32vfa
+      3hcFyOfJPspy73hNDme1LTaXsoBqJFJZeQow2E40KAMoDEQdQMAKriPS+WdT
+      wwIk1sN2L52IFsWKurgO0Rk99fuFkLkL2Ug2psxGI2YfVfvi8o2Xwz2oD4HU
+      iyZ++jROvw6MOf1zonN618APsxyzWFJds292nJxQ3diredkyT/s0gzQW6A7j
+      qLFv
+
+    default_style: 0x54000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRTabbedPanel
+    inst: tabPanel
+    dflt_w: 140
+    dflt_h: 140
+    style: 0
+    required: vrcomctl
+    included: 
+    createMethod: :newFDTabbedPanel
+    info: TabbedPanel
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - - pages
+      - lambda{|c| "click ->"}
+      - :_btArray
+    - - owndraw
+      - lambda{|c| c.owndraw_used?}
+      - :_cbOwnDraw
+    events: 
+    - selchanged
+    mthds: 
+    - setupPanels(title-1,title-2,title-3,....)
+    - send_parent2(idx,controlname,eventname)
+    - panels
+    - insertTab(index,text,textmax=text.size,lparam=0)
+    - clearTabs
+    - deleteTab(idx)
+    - countTabs
+    - selectedTab
+    - selectTab(idx)
+    - setImagelist(imagelist)
+    - setTabSize(width,height)
+    - getTabRect(i)
+    - adjustRect(x,y,w,h,flag=false)
+    - getTabTextOf(idx)
+    - setTabTextOf(idx,text)
+    - getTabImageOf(idx)
+    - setTabImageOf(idx,image)
+    - getTabLParamOf(idx)
+    - setTabLParamOf(idx,lparam)
+    mods: 
+      :VROwnerDrawControlContainer: *id009
+      :VRDropFileTarget: *id010
+      :VRResizeSensitive: *id011
+      :VRDragFileSource: *id012
+      :VRMouseFeasible: *id013
+      :VRFocusSensitive: *id014
+      :VRKeyFeasible: *id015
+      :VRMessageParentRelayer: *id017
+      :VRDrawable: *id016
+    popups: 
+    - - font
+      - setfont
+    - - color
+      - setcolor
+    items: 
+    - tab1
+    - tab2
+    bmp: |
+      
+      eJyVUMEOgjAMvfdXODQiBziWIckOBmIIAW4SzIRI9KDy+25jAzVGsc3avtd2
+      eRuElK+SY5zl7umWdBe2L3bXsiDWiphl5TkkY42QgalAhQrxQAREG7ITsay/
+      GzOHSHC5rO+ShZCk0KRsbiMaFJ/646EIcYhQUTqniIoDRJ+q/sXFL1waHTCm
+      UNRey2dX+LhujB80xskCT+HAAztuiX8wLFh4U9BNCsDhnyS3fBapMTlcpLKn
+      32wxWKK6o1tj0CMu+zQV4ZmABzxQqWY=
+
+    default_style: 0x54000000
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRMediaView
+    inst: mmedia
+    dflt_w: 200
+    dflt_h: 26
+    style: 0
+    required: vrmmedia
+    included: VRMediaViewModeNotifier
+    createMethod: :newFDCoverd
+    info: MediaView,
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - w
+    - h
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    events: 
+    - onerror()
+    - modechanged(newmode)
+    - sizechanged()
+    - mediachanged(str)
+    mthds: 
+    - mediaopen(filename,flag=0)
+    - mediaclose
+    - mode
+    - modestring(n)
+    - errorstring
+    - play
+    - pause
+    - stop
+    - eject
+    - step(n=1)
+    - seek(pos)
+    - seekHome
+    - seekEnd
+    - playable?
+    - ejectable?
+    - window?
+    - length
+    - position
+    - volume
+    - volume=(vl)
+    - speed
+    - speed=
+    - zoom
+    - zoom=
+    mods: *id002
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJyFkE0PgjAMhu/9M42MgxzLEMLBYAwxwM1kwDAYPfjx9+0AkXrQLi193pVu
+      K4RkV5mN84PX37PTVR+L/a0sSPdtrPOqDGky03LQLlDpQsIORBuaK/6anpyo
+      TfnnoRcnLYsuf24j5jGn3Xp0ihCfETpp+O4QnQaIa6rOv1eXdqm92JkDZZR9
+      1AlIwfhWsqpTyRxnhlEYSz4FRnWJZNdWsOKTpWD8L0bJjbdk4G3RET1xIsob
+      ud0PQ4PiTdxqyY33ngmyBY9ADBLkXOWCF/o5tMA=
+
+    default_style: 0x50005d80
+- !ruby/struct:FDControls::FDPallet 
+  title: System
+  items: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRMenu
+    inst: mainmenu
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: vrcontrol
+    included: VRMenuUseable
+    createMethod: :newFDMenu
+    info: Menu
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - accel
+      - lambda{|c| if c.getaccel then "true" else "false" end}
+      - :_cbTF
+    - - menus
+      - lambda{|c| "click ->"}
+      - :_btArray
+    events: 
+    mthds: 
+    - append(caption,state)
+    - insert(ptr,caption,state)
+    - delete(id)
+    - count
+    - set(sarr)
+    mods: 
+    popups: 
+    - - addItem
+      - addItem
+    items: 
+    - - "&File"
+      - - - "&New\tCtrl+N"
+          - new
+        - - "&Open"
+          - open
+        - - "&Save"
+          - save
+        - - Save&As
+          - saveas
+        - &id018 
+          - sep
+          - _vrmenusep
+          - 2048
+        - - E&xit
+          - exit
+    - - "&Edit"
+      - - - "&Delete"
+          - doDelete
+        - - Cu&t
+          - cut
+        - - "&Copy"
+          - copy
+        - - "&Paste"
+          - paste
+    - - "&Help"
+      - - - Versio&n
+          - version
+    bmp: |
+      
+      eJyNTssOgkAMvPdnGoUDHLuLKAcCMcQAN5AEMJh40Gzi19sFRB4h2EmnnWn3
+      AYKqXVC50WXfvILbQ2bx+ZnEJJvSlVGaCOqjKJmkJko0HTmB6EDDxmbIPolK
+      jw+3d3FTsql75Tusu55Cq0tyEJWD2mpriKg9QLQovW8j8+oWVa9zozCgYBob
+      U00njbU55Nbb1xgWLPI1fno2H10A/7yw0NgF2CxqbwpeNG1jYGOuryRMWwkF
+      XRGLhbnGWaTfb68BPuZ3svI=
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: FDPopup
+    inst: popupmenu
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: vrcontrol
+    included: VRMenuUseable
+    createMethod: :newFDPopup
+    info: PopupMenu
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - menus
+      - lambda{|c| "click ->"}
+      - :_btArray
+    events: 
+    mthds: 
+    - showPopup(menu)
+    - append(caption,state)
+    - insert(ptr,caption,state)
+    - delete(id)
+    - count
+    - set(sarr)
+    mods: 
+    popups: 
+    - - addItem
+      - addItem
+    items: 
+    - - "&Delete\tDelete"
+      - doDelete
+    - *id018
+    - - "&Copy\tCtrl+C"
+      - doCopy
+    - - "&Paste\tCtrl+V"
+      - doPaste
+    bmp: |
+      
+      eJyNUN8LgkAMft8/MzqD8nGeJT6IEhLqm2RYYRShHfXXd9PzR0HUxnb7vn3b
+      6YFDh1l4WMdbUTXh6SrzZFOnCcmqXMs4Sx0yVpQ6SU6UcvJ0ANGKBsVPkyaI
+      Sl8Pt7t0UWqSaxW4Gnc1RcsuyEVULjLVnhEic4C4pOz8p1+Ovnavx5DdC6uw
+      9gMx4lboH6Md7YixbXGnwL5vW9ARz+AZPJhQDjsqUvSYDAz9twUwDny/QVdq
+      go0e+Z9RDIJ5//FmwYi7gY8+9IJm8TmAxgy+5WL6eLnIBUyJ+vwugBfPFbWd
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: FDOpenDlg
+    inst: openDlg
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: 
+    included: 
+    createMethod: :newFDOpenSaveDlg
+    info: OpenDlg
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - filters
+      - lambda{|c| "click ->"}
+      - :_btArray
+    - - flags
+      - lambda{|c| "click ->"}
+      - :_btArray
+    - title
+    - defaultExt
+    events: []
+
+    mthds: 
+    - openFilenameDialog(*arg)
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJyVkFELwiAQgN/vz0i9tNdTc/QwNmKMubcguIpGQQ1hvz51bnNEUR7e/D5P
+      nQLHapWfVFmtr11+uYtDvX/qGsWZlCj1jWNoR7JJuIS1S8ogAuIWxwplx9+b
+      CB2Rdnax38sOyEry0k5mEo3zRTJ0lIwZyZzy34Ix54CxBJt2EfQrw8cCmn92
+      4KwPYcJ8D6PiQSz5Iacl6TtDQ52J9iTH0ZmONyHCiTPDKEJ1qpF75tMFLLc4
+      vYtO+eLOxP94pJghFvACWyK7dw==
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: FDSaveDlg
+    inst: saveDlg
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: 
+    included: 
+    createMethod: :newFDOpenSaveDlg
+    info: SaveDlg
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - filters
+      - lambda{|c| "click ->"}
+      - :_btArray
+    - - flags
+      - lambda{|c| "click ->"}
+      - :_btArray
+    - title
+    - defaultExt
+    events: []
+
+    mthds: 
+    - saveFilenameDialog(*arg)
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJyVkE0PgjAMhu/9M4ueuL5sjnAgEEMI82ZiMjESPWhI/PV2HyBeBNus2/ts
+      bbdRimZTnnXdbK/P8nKXx3b/MC1kZ7WszS1FtJPlIF1A64IeAAJ2GE9oXv82
+      GQdgc072tXhhGVoPebNQGByvkjCghBiUcMjPlRCOkRAJDv2X2xXa9yR/h8wB
+      oxC6qcJrvJY0xcdMoBh9haap4qyAzDt2u6jpz4T4xKCJQZUE8LFs1af1NAf0
+      Bu4Vskg=
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: FDSelectDir
+    inst: selectDirectory
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: 
+    included: 
+    createMethod: :newFDSelectDir
+    info: SelectDirectory
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - title
+    - initialdir
+    - - flags
+      - lambda{|c| "click ->"}
+      - :_btArray
+    events: []
+
+    mthds: 
+    - selectDirectory(*arg)
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJyFUcEKgzAMvednwnbRa1qn7DCUIcN6GwwqQ2Gwib+/pHWuim4pSZPXJK9p
+      QVGzy5u0vOzbPr8/9LU6v0xFurWpLmujaJSbZaPFkBGTsQLRgaaMv6JHJbJH
+      Lna92LEMij+cEo69T0XslRLEIUGB3F4gCgaIMdXd1nIk2TfWUR89pxgCwJpM
+      sc4TwvNlA1gwTAlhed0ZUt6zIQorl7UrWNBGRDlCEEbDD4CopitxPPyO5TGV
+      hc+M2wV+pJBARjL+n1U402zBG8k2t2U=
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: FDFontDlg
+    inst: fontDlg
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: 
+    included: 
+    createMethod: :newFDModule
+    info: FontDlg
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    events: []
+
+    mthds: 
+    - chooseFontDialog(*arg)
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJytT00LwjAMvffPFD3t+tJZ8SAbMsbqTRCq4nAHZX/fJNu0ehAFU/LxXpLX
+      1hDqWXHwVT0/34pT53bN5hoauGP0rgoXwmj7yMFJQCPB94ABFpgmPNefzY0O
+      xBUvqxYXkcmoJDfXOXrhy2xw5Nb2uRVKc2mtcMbaDNv25cRvsfl1YcJhycsB
+      FLkEjQS1gnX4gSnBAZoVGyESdZaBCD3xez/BJiUGRVIB6C1i9P8/p8vDM+5Q
+      P7y5
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: FDColorDlg
+    inst: colorDlg
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: 
+    included: 
+    createMethod: :newFDModule
+    info: ColorDlg
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    events: []
+
+    mthds: 
+    - chooseColorDialog(*arg)
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJyVUMEKwjAMvedniu4wr892BQ9jm4yxeROEOFF04Cj49bbbRLspakrSvNeX
+      piktUcySvc6L+bFNDhe5LdfXqoSsWcu8Oi8x2I5tkC6gdEEbgIAID4W2OeIs
+      AVSkGG9MDg7wyhZ3GpuwJbkj7WGsYByfLnqHEsIo4ahuT4VwHAmxwObkLZ5g
+      7xUO16sawhYbn/gHk0+MO4RtyLf4hmAXZFNM3wRT/Lye+g52tKwNW9M0Df+O
+      6bNgNMKbT6VXgu7TsbIO
+
+    default_style: 
+- !ruby/struct:FDControls::FDPallet 
+  title: Layout
+  items: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRMgdHorizTwoPaneFrame
+    inst: horiz2Pane
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: vrmgdlayout
+    included: VRMarginedFrameUseable
+    createMethod: :newFD2Pane
+    info: Horiz2Pane
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - register
+      - lambda{|c| "click ->"}
+      - :_btLayout
+    - - ratio
+      - lambda{|c|c.substance.ratio}
+      - self.ratio
+    - - position
+      - lambda{|c|c.substance.position}
+      - self.position
+    - - gap
+      - lambda{|c|c.substance.gap}
+      - num
+    - - bevel
+      - &id019 |-
+        lambda{|c|
+              { VRMgdTwoPaneFrame::BevelNone=>"None",
+                VRMgdTwoPaneFrame::BevelGroove1=>"Groove1",
+                VRMgdTwoPaneFrame::BevelGroove2=>"Groove2",
+                VRMgdTwoPaneFrame::BevelRaise1=>"Raise1",
+                VRMgdTwoPaneFrame::BevelRaise2=>"Raise2",
+                VRMgdTwoPaneFrame::BevelSunken1=>"Sunken1",
+                VRMgdTwoPaneFrame::BevelSunken2=>"Sunken2"}[c.substance.bevel]}
+      - :_cbBevel
+    - - lLimit
+      - lambda{|c|c.substance.lLimit}
+      - num
+    - - rLimit
+      - lambda{|c|c.substance.rLimit}
+      - num
+    events: []
+
+    mthds: []
+
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJylUE0LwjAMvefPBD3t+to58SAOGbLuJgiZouhB2d837T7o6mEHU5rkvab5
+      IoN2dWiL6rS+fw63lz3Xx7erYa9S2Mo9DQa5iCrrFWqvig4gYIMpYlHscAHZ
+      6eeQSx1RUgKpj/scnefLrL/ImbucPRVsyew5Ys7QPGZHeutgFjAtBURYBjz5
+      NBI9CYwYW8USYTTiZvMboXQlaUCaIC5AoYKCeQdpi//P/IMp3jJ9Adl3tEM=
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRMgdVertTwoPaneFrame
+    inst: vert2Pane
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: vrmgdlayout
+    included: VRMarginedFrameUseable
+    createMethod: :newFD2Pane
+    info: Vert2Pane
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - register
+      - lambda{|c| "click ->"}
+      - :_btLayout
+    - - ratio
+      - lambda{|c|c.substance.ratio}
+      - self.ratio
+    - - position
+      - lambda{|c|c.substance.position}
+      - self.position
+    - - gap
+      - lambda{|c|c.substance.gap}
+      - num
+    - - bevel
+      - *id019
+      - :_cbBevel
+    - - uLimit
+      - lambda{|c|c.substance.uLimit}
+      - num
+    - - lLimit
+      - lambda{|c|c.substance.lLimit}
+      - num
+    events: []
+
+    mthds: []
+
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJyNUE0PgjAMvffPNHri+jaEeDAQQwzjZmJSNBo9aPj7bpMAA0G7tN17Wz9J
+      oV5ldVIc1tdXdnnoY7l/mhL6LIkuzF2hlZNYo51B6UzSAARs0P34KbpVQLY2
+      2OeyF7GkeNI+7mI0js+jjyJmbmJ2lPc5s+OIOUJ180dCb6ACbCPTARbfdk8Y
+      35DqcNtrOpeQphXmsQnmV0JjYoyXEtI/Fb+N4IrQcMbKr35hSdOZ+y3TG2ju
+      s6o=
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRMgdFullsizeLayoutFrame
+    inst: fullsize
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: vrmgdlayout
+    included: VRMarginedFrameUseable
+    createMethod: :newFDLayout
+    info: FullsizeFrame
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - register
+      - lambda{|c| "click ->"}
+      - :_btLayout
+    events: []
+
+    mthds: []
+
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJyVUMEKwjAMvednip52fevc8CAbMmTdTRA6xaEHZb9v09Q6pzhsaZL3mrR5
+      oRTdouzyerc838vTVe+b7c000Eeb69pcUoR1sM5oNmjY5ANAwAoxY3bpcAC7
+      dsX+LRdYR1pPustNhoH5KpGDTKkhU0x5XynFHCmVoO3ftjWcVXDMQfoNe0RC
+      ScKzWLBB6rHzlrHjwwOt4J4CUTAx7WAO078FY0Si0f8dO/hscSpBJNJLo6SP
+      Z/BraHFgUcMDBla0hQ==
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRMgdHorizLayoutFrame
+    inst: horizFrame
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: vrmgdlayout
+    included: VRMarginedFrameUseable
+    createMethod: :newFDLayout
+    info: HorizFrame
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - register
+      - lambda{|c| "click ->"}
+      - :_btLayout
+    events: []
+
+    mthds: []
+
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJydUMsOgkAMvPdnGuECx2GRxIOBGGLAm4SkaEQ9aPh9W0RFLwa6mW5n2u6j
+      FKFZpE2Sb73TPT1e3b7Y3MoC7iCJy8tLhMFqUefMoTCXdAABS7wr/pobAMhK
+      m/uzNBAVpRc1uY7RmZ4FTyBm7mI2qd8zZtOIOcCu/VpS+bVfs8IPLZLKU5UV
+      51DzH06/whROUxvGnObc+OI098nT/sxjC8VGS+Mp0wMfdbOq
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRMgdVertLayoutFrame
+    inst: vertFrame
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: vrmgdlayout
+    included: VRMarginedFrameUseable
+    createMethod: :newFDLayout
+    info: VertFrame
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - register
+      - lambda{|c| "click ->"}
+      - :_btLayout
+    events: []
+
+    mthds: []
+
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJydUMEOgjAMvfdnGvGCx8cmiQcDMcQMbxKSopHoQcPvuwHT6UXkNX1bX9e9
+      bJSgWWRNWuyjyyM739TR7O6lgTpJqorymmBELZaUIxhHaQcQsMbrxE+oMQHZ
+      2OH+LrsRK0ov2uZWo3N6Hg8JzdxpdlK/5sxOI+YYh/YjpFrWYUgVhf13Td/C
+      5JrZOXvUkx19TXMcPWiO4/9v5hArCYaHX6YnKduzow==
+
+    default_style: 
+  - !ruby/struct:FDControls::FDStruct 
+    klass: VRMgdGridLayoutFrame
+    inst: gridFrame
+    dflt_w: 24
+    dflt_h: 24
+    style: 0
+    required: vrmgdlayout
+    included: VRMarginedFrameUseable
+    createMethod: :newFDLayout
+    info: GridFrame
+    attrs: 
+    - name
+    - caption
+    - x
+    - y
+    - - register
+      - lambda{|c| "click ->"}
+      - :_btLayout
+    - - xsize
+      - lambda{|c|c.substance.instance_eval "@_vr_xsize"}
+      - "@_vr_xsize"
+    - - ysize
+      - lambda{|c|c.substance.instance_eval "@_vr_ysize"}
+      - "@_vr_ysize"
+    events: []
+
+    mthds: []
+
+    mods: 
+    popups: []
+
+    items: 
+    bmp: |
+      
+      eJydUE0PgjAMvffPNLILO5ZNEg8GYogBbxJi0fh10PD3bREUvYh0eW/t67aX
+      FSKqZ0kdZ+vgeE8OV7fNV7ciJ7fn2GXFJaIuKhZySpQrxQ0REM3pdeJnuA5E
+      vJDL7VuSsIjcitJcempUT8MnyCM2HlVq9xRRNUAMaXP6WFyaylQoMFYzLgNR
+      UXC20n/X8C2MrhHF2QjjTmBHO/Y1THHsDWGK4/9/xmFY1tHCcMrwAKz/rbQ=
+
+    default_style: 

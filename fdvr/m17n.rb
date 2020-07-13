@@ -9,7 +9,7 @@ require 'vr/vrcomctl'
 
 module EN
   
-  HTML_Help=File.dirname(__FILE__).gsub(/\//,'\\')+'\doc\vrswin-en.chm'
+  HTML_Help=$program_dir.gsub(/\//,'\\')+'\doc\vrswin-en.chm'
   module FDItems
     FDMenuTemplate=
     [
@@ -156,7 +156,7 @@ module EN
 end
 
 module JA
-  HTML_Help=File.dirname(__FILE__).gsub(/\//,'\\')+'\doc\vrswin-ja.chm'
+  HTML_Help=$program_dir.gsub(/\//,'\\')+'\doc\vrswin-ja.chm'
   module FDItems
     FDMenuTemplate=
       [

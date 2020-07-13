@@ -718,7 +718,11 @@ FDPallet["Layout",[
 ]]]
 =end
     
-    a = YAML.load_file($program_dir + '/fddefault.yml')
+    if defined? ExerbRuntime
+      a = YAML.load(ExerbRuntime.open('fddefault.yml'))
+    else
+      a = YAML.load_file($program_dir + '/fddefault.yml')
+    end
     
     a.each{|i|
       i.items.each{|j|

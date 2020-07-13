@@ -6,8 +6,7 @@
 
 require 'vr/contrib/inifile'
 
-$program_dir = File.dirname(__FILE__)
-Dir.chdir $program_dir
+#Dir.chdir $program_dir
 $ini=Inifile.new("FormDesigner.ini")
 $Lang=$ini.read("settings","language","EN")
 $Ver='060501'
@@ -880,6 +879,39 @@ class FDControlSelection < VRForm # As Main Form
                                       i.makeModStruct(i,@class_struct1)}
         
     end
+    #########出力結果をソートする#############
+    s_out = ""
+    add_control_buf  = []
+    atter_reader_buf = []
+    s.each do |s_line|
+      add_control_flag  = false
+      atter_reader_falg = false
+      if s_line =~ /^ +addControl\(/
+        add_control_flag  = true
+        add_control_buf.push s_line
+        next
+      end
+      if s_line =~ /^ +attr_reader :/
+        atter_reader_falg = true
+        atter_reader_buf.push s_line
+        next
+      end
+      if add_control_buf.size > 0
+        add_control_buf.sort!
+        s_out += add_control_buf.join
+        add_control_buf  = []
+      end
+      if atter_reader_buf.size > 0
+        atter_reader_buf.sort!
+        s_out += atter_reader_buf.join
+        atter_reader_buf = []
+      end
+      s_out += s_line
+    end
+    if add_control_buf.size == 0 && atter_reader_buf.size == 0
+      s = s_out
+    end
+    #############################################
     open(fname,"w") {|f| f.write s 
       $tstamp=f.stat.mtime.to_i
       clear_modified}
