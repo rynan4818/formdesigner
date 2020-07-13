@@ -1,0 +1,60 @@
+#history of FormDesigner for VisualuRuby
+
+2003/10/13
+          FormDesiner 031013 released
+2003/10/15
+          Updated readme.txt
+          Removed vruby030104unstable.zip
+2003/10/19
+          Corrected the problem when changing the attribute of the
+          control on "Rebar."
+2003/10/20
+          Enabled it to choose a new-line code from two, LF and CRLF,
+          on cygwin.
+2003/10/26
+          Fixed the problem of "UpdateProject" when there is a 
+          ListView.
+2003/11/02
+          Changed interface of menu items editing.
+          Useabled popup menu.
+2003/11/04
+          FormDesiner 031103 released
+2003/11/05
+          Fixed the stupid bug which will be downed if "Version" is 
+          clicked... ah
+2003/11/06
+          Corrected becoming an error, when the file of an old version
+           with a menu was read.
+2003/11/10
+          Fixed the bug which will fall down if a button is pushed
+          without choosing anything in the menu editor.
+2003/11/14
+          Corrected that up-and-down operation did not work in the 
+          sub menu of a menu editor.
+2003/11/16
+          Added the copyrighs to the source code.
+2003/11/17
+          Fixed some bugs:
+          If the attribute of the control on Rebar is changed, it will down 
+          at the time of a source output.
+          It will down, if a list view is put on TabbedPanel and a style 
+          is changed.
+          If ListView is on TbbedPanel, other control will be missing 
+          at the time of a source output.
+2004/02/25
+          Corrected the bug which becomes an error, when the caption of 
+          control the quotation mark was contained.
+          Moved the owner draw to the attribute tab from the style dialog.
+          Cut,copy and paste were mounted.
+          EditComboBox was added.
+          Choosing the font of FormDesigner was enabled.
+          Memorizing the position of InspectWindow was inabled.
+          Accessor to childs was automatically added to parent control.
+2004/03/03
+          Improved so that it may not waste the resource of a font.
+           FormDesiner 040303 released.
+2004/03/20
+          Updated with correction of swin and vruby.
+2004/04/17
+          Corrected the bug that the width and the height of ListBox were set
+          to 0, when saved immediately after changing the style of ListBox.
